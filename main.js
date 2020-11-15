@@ -32,30 +32,30 @@ setInterval(() => {
                 console.log('yes')
                 for (x of clientArr) {
                     let nowtime = Date.parse(new Date()) / 1000; //以s为单位
-                    if(body.device_id==1){
-                        if (nowtime > body.result && nowtime < body.end) {
-                        x.write("0")
-                        x.write("\0")
-                        } else{
+                    if (body.device_id == 1) {
+                        if (nowtime > body.result && nowtime < body.end && body.arrive) {
+                            x.write("0")
+                            x.write("\0")
+                        } else {
                             x.write("1")
                             x.write("\0")
-                            
+
                         }
-                    }else{
-                        if (nowtime > body.result && nowtime < body.end) {
-                        x.write("2")
-                        x.write("\0")
-                        } else{
-                        x.write("3")
-                        x.write("\0")
+                    } else {
+                        if (nowtime > body.result && nowtime < body.end && body.arrive) {
+                            x.write("2")
+                            x.write("\0")
+                        } else {
+                            x.write("3")
+                            x.write("\0")
                         }
                     }
                 }
-            }else{
-                for (x of clientArr){
+            } else {
+                for (x of clientArr) {
                     x.write("999")
                 }
             }
         })
-    }, 10 * 1000) //每隔60s做一次监听
+    }, 10 * 1000) //每隔10s做一次监听
 server.listen(30000);
